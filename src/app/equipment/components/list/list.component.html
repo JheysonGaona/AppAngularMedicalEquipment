@@ -1,0 +1,29 @@
+<h4>Listado</h4>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Nombre del Equipo</th>
+            <th scope="col">Marca</th>
+            <th scope="col">Modelo</th>
+            <th scope="col">Especialización</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Precio Unitario</th>
+            <th scope="col">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let currentEquip of equipList">
+            <td> {{currentEquip.nameEquip}} </td>
+            <td> {{currentEquip.brand}} </td>
+            <td> {{currentEquip.model}} </td>
+            <td> {{currentEquip.specialization}} </td>
+            <td> {{currentEquip.amount}} </td>
+            <td> {{currentEquip.unitPrice}} </td>
+            <td>
+                <button type="button" (click)="onDeleteEqip(currentEquip.id)" class="btn btn-danger">X</button>
+                <button type="button" class="btn btn-warning">-</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
