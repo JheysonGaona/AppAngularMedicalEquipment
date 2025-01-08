@@ -10,7 +10,7 @@ import { AddEquipComponent } from './components/add-equip/add-equip.component';
   declarations: [
     MainPageComponent,
     AddEquipComponent,
-    ListComponent
+    ListComponent,
   ],
   exports: [
     MainPageComponent

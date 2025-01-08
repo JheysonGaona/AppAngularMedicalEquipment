@@ -15,6 +15,16 @@ export class AddEquipComponent {
   @Output()
   public onNewEquip: EventEmitter<Equip> = new EventEmitter();
 
+
+  options = [
+    { value: '1', label: 'Cardiología' },
+    { value: '2', label: 'Neurología' },
+    { value: '3', label: 'Radiología e Imagenología' },
+    { value: '4', label: 'Ginecología y Obstetricia' },
+    { value: '5', label: 'Anestesiología y Cuidados Críticos' },
+  ];
+
+  
   public equip: Equip = {
     id: '',
     nameEquip: '',
@@ -22,7 +32,8 @@ export class AddEquipComponent {
     model: '',
     specialization: '',
     amount: 0,
-    unitPrice: 0
+    unitPrice: 0,
+    localDateTime: ''
   };
 
 
@@ -36,7 +47,7 @@ export class AddEquipComponent {
     // *************************************************
 
 
-
+    /*
     // Se limpia el formulario
     this.equip = {
       id: '',
@@ -47,5 +58,6 @@ export class AddEquipComponent {
       amount: 0,
       unitPrice: 0
     }
+    */
   }
 }

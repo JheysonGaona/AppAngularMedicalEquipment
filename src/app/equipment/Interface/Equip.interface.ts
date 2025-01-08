@@ -6,4 +6,5 @@ export interface Equip {
     specialization: string;
     amount: number;
     unitPrice: number;
+    localDateTime: string
 }

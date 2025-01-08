@@ -10,13 +10,18 @@
     <input type="text" [(ngModel)]="equip.model" name="model" id="model" class="form-control mb-2" placeholder="" required>
     
     <label for="specialization">Especialización</label>
-    <select id="specialization">
+    <select [(ngModel)]="equip.specialization" name="specialization" id="specialization">
+        <option *ngFor="let option of options" [value]="option.value">
+            {{ option.label }}
+        </option>
+        <!--
         <option value="" disabled selected>-- Seleccione una opción --</option>
         <option value="cardiologia">Cardiología</option>
         <option value="radiologia">Radiología e Imagenología</option>
         <option value="neurologia">Neurología</option>
         <option value="ginecologia">Ginecología y Obstetricia</option>
         <option value="anestesiologia">Anestesiología y Cuidados Críticos</option>
+        -->
     </select>
 
     <label for="amount">Cantidad</label>

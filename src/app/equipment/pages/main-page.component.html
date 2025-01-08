@@ -2,11 +2,11 @@
 
 <div class="row">
     <div class="col">
-        <app-equipment-list [equipList]="equips" (onDelete)="onDeleteEquip($event)"></app-equipment-list>
-    </div>
-    
-    <div class="col">
         <app-equipment-add-equip (onNewEquip)="onNewEquip($event)"></app-equipment-add-equip>
+    </div>
+
+    <div class="col">
+        <app-equipment-list [equipList]="equips" (onDelete)="onDeleteEquip($event)"></app-equipment-list>
     </div>
 </div>
 
