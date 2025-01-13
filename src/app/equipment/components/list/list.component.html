@@ -22,7 +22,7 @@
             <td> {{currentEquip.unitPrice}} </td>
             <td>
                 <button type="button" (click)="onDeleteEqip(currentEquip.id)" class="btn btn-danger">X</button>
-                <button type="button" class="btn btn-warning">-</button>
+                <button type="button" (click)="onEditEquip(currentEquip)" class="btn btn-warning">Edit</button>
             </td>
         </tr>
     </tbody>

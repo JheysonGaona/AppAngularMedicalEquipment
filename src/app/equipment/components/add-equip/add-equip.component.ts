@@ -10,10 +10,12 @@ import { Equip } from '../../Interface/Equip.interface';
 
 export class AddEquipComponent {
 
-
   // permite la conexcion, para emitir
   @Output()
   public onNewEquip: EventEmitter<Equip> = new EventEmitter();
+
+  @Output()
+  public onUpdateEquip: EventEmitter<Equip> = new EventEmitter();
 
 
   options = [
@@ -24,40 +26,43 @@ export class AddEquipComponent {
     { value: '5', label: 'Anestesiología y Cuidados Críticos' },
   ];
 
-  
-  public equip: Equip = {
-    id: '',
-    nameEquip: '',
-    brand: '',
-    model: '',
-    specialization: '',
-    amount: 0,
-    unitPrice: 0,
-    localDateTime: ''
-  };
+
+  public equip: Equip = this.getEmptyEquip();
+  public isEditing: boolean = false;
 
 
   // Se emplea eeste metodo para emitir un nuevo equipo
   emitEquip():void {
+    if (this.isEditing) {
+      this.onUpdateEquip.emit(this.equip); // Emitir evento para actualizar
+    } else {
+      this.onNewEquip.emit(this.equip); // Emitir evento para agregar
+    }
+    this.resetForm();
+  }
 
-    this.onNewEquip.emit(this.equip);
-    // *************************************************
-    // Generar condiciones para evitar que el formulario
-    // no acepte valores nulos o vacios del formulario
-    // *************************************************
 
+  setEditEquip(equip: Equip): void {
+    this.equip = { ...equip }; // Copia los valores del equipo
+    this.isEditing = true;
+  }
 
-    /*
-    // Se limpia el formulario
-    this.equip = {
+  private resetForm(): void {
+    this.equip = this.getEmptyEquip();
+    this.isEditing = false;
+  }
+  
+  // Se limpia el formulario
+  private getEmptyEquip(): Equip {
+    return {
       id: '',
       nameEquip: '',
       brand: '',
       model: '',
       specialization: '',
       amount: 0,
-      unitPrice: 0
-    }
-    */
+      unitPrice: 0,
+      localDateTime: ''
+    };
   }
 }

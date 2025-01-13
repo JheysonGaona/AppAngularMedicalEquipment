@@ -14,14 +14,6 @@
         <option *ngFor="let option of options" [value]="option.value">
             {{ option.label }}
         </option>
-        <!--
-        <option value="" disabled selected>-- Seleccione una opción --</option>
-        <option value="cardiologia">Cardiología</option>
-        <option value="radiologia">Radiología e Imagenología</option>
-        <option value="neurologia">Neurología</option>
-        <option value="ginecologia">Ginecología y Obstetricia</option>
-        <option value="anestesiologia">Anestesiología y Cuidados Críticos</option>
-        -->
     </select>
 
     <label for="amount">Cantidad</label>
@@ -30,8 +22,7 @@
     <label for="unitPrice">Precio unitario</label>
     <input type="number" [(ngModel)]="equip.unitPrice" name="unitPrice" id="unitPrice" class="form-control mb-2" placeholder="" step="0.01" required>
 
-    <button type="submit" class="btn btn-primary">
-        Agregar
-    </button>
+    <button type="submit" *ngIf="!isEditing" class="btn btn-primary">Agregar</button>
+    <button type="submit" *ngIf="isEditing" class="btn btn-success">Actualizar</button>
     <pre> {{equip | json}} </pre>
 </form>

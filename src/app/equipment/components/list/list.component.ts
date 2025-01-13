@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Equip } from '../../Interface/Equip.interface';
-import { EquipService } from '../../services/equip.service';
+import { AddEquipComponent } from '../add-equip/add-equip.component';
 
 @Component({
   standalone: false,
@@ -19,9 +19,19 @@ export class ListComponent{
   @Output()
   public onDelete: EventEmitter<string> = new EventEmitter();
 
+  // Evento que emite al padre una emision
+  @Output()
+  public onEdit: EventEmitter<Equip> = new EventEmitter();
+
+
   // Metodo que permite eliminar un equipo del arreglo
   onDeleteEqip(id?: string):void {
     // se activa el evento
     this.onDelete.emit(id);
+  }
+
+
+  onEditEquip(equip: Equip): void {
+    this.onEdit.emit(equip);
   }
 }

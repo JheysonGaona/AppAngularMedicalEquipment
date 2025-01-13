@@ -1,6 +1,6 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Equip } from '../Interface/Equip.interface';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -16,16 +16,12 @@ export class EquipService{
     // Almacena en el padre todos los equipos registrados
     public equips: Equip[] = [];
 
+
     // Se emplea este metodo para solicitar la lista de todos los equipos medicos
     public getListEquips(): Observable<Equip[]>{
         return this.http.get<Equip[]>(this.baseUrl);
     }
-    
-    // Se emplea este metodo para poder agregar un nuevo equipo
-    // public addEquip (equip: Equip): Observable<Equip> {
-    //     this.equips.push(equip);
-    //     return this.http.post<Equip>(`${this.baseUrl}`, equip);
-    // }
+
 
     // Se emplea este metodo para obtener un equipo en base al id
     public getEquipById(id: string): Observable<Equip> {
@@ -38,12 +34,26 @@ export class EquipService{
         return this.http.delete<void>(`${this.baseUrl}/${id}`);
     }
 
+
     // Se emplea este metodo para poder agregar un nuevo equipo
-    public addEquip (equip: Equip): void {
+    public addEquip (equip: Equip): Observable<Equip> {
+        console.log("AGREGANDO NUEVO EQUIPO");
         this.equips.push(equip);
-        this.http.post<Equip>(`${this.baseUrl}`, equip).subscribe({
-            next: response => console.log('Registro exitoso:', response),
-            error: err => console.error('Error al agregar:', err)
-        });
+        return this.http.post<Equip>(`${this.baseUrl}`, equip);
+    }
+
+
+    // Se emplea este metodo para poder agregar un nuevo equipo
+    public updateEquip (equip: Equip): Observable<Equip> {
+        // this.equips.push(equip);
+        // return this.http.put<Equip>(`${this.baseUrl}`, equip);
+        return this.http.put<Equip>(`${this.baseUrl}/${equip.id}`, equip).pipe(
+            tap((updatedEquip: Equip) => {
+                const index = this.equips.findIndex(e => e.id === updatedEquip.id);
+                if (index !== -1) {
+                    this.equips[index] = updatedEquip;
+                }
+            })
+        );
     }
 }
